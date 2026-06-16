@@ -24,7 +24,7 @@ import matplotlib.pyplot as plt
 
 RANDOM_STATE = 42
 
-df = pd.read_csv("/mnt/user-data/uploads/mushroom.csv", sep=";")
+df = pd.read_csv("mushroom.csv", sep=";")
 print("Dimensões do dataset:", df.shape)
 print("\nDistribuição da classe-alvo:")
 print(df["mushroom_type"].value_counts())
@@ -79,7 +79,7 @@ print(f"real_venenoso      {cm[1,0]:>8}        {cm[1,1]:>6}")
 fn = cm[1, 0]  # venenoso previsto como comestível: erro crítico
 print(f"\n*** Falsos negativos (venenoso previsto como comestível): {fn} ***")
 
-df_imp = pd.read_csv("/mnt/user-data/uploads/mushroom.csv", sep=";")
+df_imp = pd.read_csv("mushroom.csv", sep=";")
 mode_val = df_imp.loc[df_imp["stalk-root"] != "?", "stalk-root"].mode()[0]
 df_imp["stalk-root"] = df_imp["stalk-root"].replace("?", mode_val)
 X2 = df_imp.drop(columns=["mushroom_type"] + const_cols)
@@ -102,5 +102,5 @@ ConfusionMatrixDisplay(cm, display_labels=["comestível", "venenoso"]).plot(
     ax=ax, cmap="Blues", colorbar=False)
 ax.set_title("Matriz de Confusão — Árvore de Decisão")
 plt.tight_layout()
-plt.savefig("/mnt/user-data/outputs/confusion_matrix.png", dpi=120)
+plt.savefig("confusion_matrix.png", dpi=120)
 print("\nGráfico salvo: confusion_matrix.png")
